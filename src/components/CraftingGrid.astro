@@ -1,0 +1,96 @@
+---
+/**
+ * A 3x3 crafting grid in the style of the in-game crafting table.
+ * `cells` is 9 entries, reading order; null = empty slot.
+ * Textures are mcmeta paths like "item/copper_ingot" or "block/furnace_front".
+ */
+interface Cell {
+	tex: string;
+	label: string;
+}
+interface Props {
+	cells: (Cell | null)[];
+	result: Cell;
+	caption?: string;
+}
+const { cells, result, caption } = Astro.props;
+const url = (t: string) =>
+	`https://cdn.jsdelivr.net/gh/misode/mcmeta@assets/assets/minecraft/textures/${t}.png`;
+---
+
+<figure class="craft">
+	<div class="bench" role="img" aria-label={caption ?? `Crafting recipe for ${result.label}`}>
+		<div class="grid">
+			{
+				cells.map((c) =>
+					c ? (
+						<span class="slot" title={c.label}>
+							<img src={url(c.tex)} alt={c.label} width="32" height="32" loading="lazy" />
+						</span>
+					) : (
+						<span class="slot slot-empty" />
+					)
+				)
+			}
+		</div>
+		<span class="arrow" aria-hidden="true">›</span>
+		<span class="slot slot-result" title={result.label}>
+			<img src={url(result.tex)} alt={result.label} width="40" height="40" loading="lazy" />
+		</span>
+	</div>
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+	.craft {
+		margin: 1.5rem 0;
+	}
+	.bench {
+		display: inline-flex;
+		align-items: center;
+		gap: 1.1rem;
+		padding: 1rem 1.25rem;
+		border: 1px solid var(--sl-color-hairline);
+		border-inline-start: 3px solid var(--sm-copper, #c8773c);
+		border-radius: 0.6rem;
+		background: color-mix(in srgb, var(--sl-color-black) 60%, var(--sl-color-bg));
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(3, 3.1rem);
+		grid-auto-rows: 3.1rem;
+		gap: 0.3rem;
+	}
+	.slot {
+		display: grid;
+		place-items: center;
+		width: 3.1rem;
+		height: 3.1rem;
+		border-radius: 0.3rem;
+		background: var(--sl-color-bg-inline-code);
+		box-shadow:
+			inset 0 2px 3px rgba(0, 0, 0, 0.35),
+			inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+	}
+	.slot img {
+		image-rendering: pixelated;
+	}
+	.slot-result {
+		width: 3.8rem;
+		height: 3.8rem;
+		box-shadow:
+			inset 0 2px 3px rgba(0, 0, 0, 0.35),
+			0 0 0 2px color-mix(in srgb, var(--sm-copper-bright, #e0a25a) 65%, transparent);
+	}
+	.arrow {
+		font-size: 2.2rem;
+		line-height: 1;
+		color: var(--sm-copper-bright, #e0a25a);
+		font-weight: 700;
+	}
+	figcaption {
+		margin-top: 0.5rem;
+		font-size: 0.9rem;
+		color: var(--sl-color-gray-3);
+	}
+</style>

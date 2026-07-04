@@ -1,0 +1,74 @@
+---
+title: Sunday Market
+description: Guides and almanacs for the Sunday Market — put your copper golems to work with Work Orders.
+template: splash
+hero:
+  title: The Sunday Market Almanac
+  tagline: Field guides for our corner of the blocky world — starting with the copper folk of Work Orders.
+  image:
+    file: ../../assets/golem.png
+    alt: A copper golem in a hard hat, proudly holding a rolled work order.
+  actions:
+    - text: Put golems to work
+      link: /work-orders/getting-started/
+      icon: right-arrow
+    - text: Browse the six jobs
+      link: /work-orders/
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## The six jobs
+
+<CardGrid stagger>
+	<Card title="Courier" icon="random">
+		Hauls items from one container to another. The workhorse of any storage room —
+		hand it a route and forget about it.
+	</Card>
+	<Card title="Stoker" icon="setting">
+		Keeps a furnace fed: fuel to the fuel slot, ore to the input. Smelting lines
+		that never go cold.
+	</Card>
+	<Card title="Restocker" icon="add-document">
+		Tops a container up to a set amount. Perfect for shop chests, brewing supplies,
+		and the community bread barrel.
+	</Card>
+	<Card title="Janitor" icon="approve-check">
+		Vacuums up dropped items nearby and banks them in a chest. No more inventory
+		confetti after a creeper visit.
+	</Card>
+	<Card title="Sorter" icon="list-format">
+		Splits one chest across many, matching items to the chest that already holds
+		their kind. A tidy warehouse, on legs.
+	</Card>
+	<Card title="Farmhand" icon="star">
+		Harvests and replants the crops around it. Pair one with a Janitor and the
+		farm runs itself.
+	</Card>
+</CardGrid>
+
+## Start exploring
+
+<CardGrid>
+	<LinkCard
+		title="Getting started"
+		description="Craft a Work Order, hand it to a golem, tap two chests. That's the whole tutorial."
+		href="/work-orders/getting-started/"
+	/>
+	<LinkCard
+		title="Crafting recipes"
+		description="Every Work Order, on one page — copper and paper around the job's tool."
+		href="/work-orders/recipes/"
+	/>
+	<LinkCard
+		title="Golem care"
+		description="Waxing, oxidation, the whistle, follow mode, and the occasional gift of a flower."
+		href="/work-orders/golem-care/"
+	/>
+	<LinkCard
+		title="Get the plugin"
+		description="Work Orders is free on Modrinth — Paper and Purpur servers, no client mod needed."
+		href="https://modrinth.com/plugin/work-orders-golems"
+	/>
+</CardGrid>

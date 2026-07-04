@@ -1,0 +1,74 @@
+---
+title: Crafting Recipes
+description: Every Work Order recipe — five copper ingots and a sheet of paper around the job's tool.
+---
+
+import CraftingGrid from '../../../components/CraftingGrid.astro';
+
+export const C = { tex: 'item/copper_ingot', label: 'Copper Ingot' };
+export const P = { tex: 'item/paper', label: 'Paper' };
+export const frame = (tool) => [null, C, null, C, P, C, C, tool, C];
+
+Every Work Order shares one frame: **five copper ingots around a sheet of paper**,
+with the **job's tool** in the bottom-center slot. Craft the one you want, then
+hand it to a copper golem — the golem takes the job on the spot.
+
+:::note
+The Work Order is used up when a golem accepts it. The recipes below are the
+defaults — server owners can change shapes and costs, so check your server's
+recipe book if something looks different.
+:::
+
+## Courier
+
+<CraftingGrid
+	cells={frame({ tex: 'item/hopper', label: 'Hopper' })}
+	result={{ tex: 'item/paper', label: 'Courier Work Order' }}
+	caption="Courier Work Order — hauls items from one container to another."
+/>
+
+## Stoker
+
+<CraftingGrid
+	cells={frame({ tex: 'block/furnace_front', label: 'Furnace' })}
+	result={{ tex: 'item/paper', label: 'Stoker Work Order' }}
+	caption="Stoker Work Order — keeps a furnace fed."
+/>
+
+## Restocker
+
+<CraftingGrid
+	cells={frame({ tex: 'block/barrel_side', label: 'Barrel' })}
+	result={{ tex: 'item/paper', label: 'Restocker Work Order' }}
+	caption="Restocker Work Order — tops a container up to a set amount."
+/>
+
+## Janitor
+
+<CraftingGrid
+	cells={frame({ tex: 'item/brush', label: 'Brush' })}
+	result={{ tex: 'item/paper', label: 'Janitor Work Order' }}
+	caption="Janitor Work Order — tidies dropped items into a chest."
+/>
+
+## Sorter
+
+<CraftingGrid
+	cells={frame({ tex: 'item/comparator', label: 'Redstone Comparator' })}
+	result={{ tex: 'item/paper', label: 'Sorter Work Order' }}
+	caption="Sorter Work Order — distributes one chest across many."
+/>
+
+## Farmhand
+
+<CraftingGrid
+	cells={frame({ tex: 'item/iron_hoe', label: 'Iron Hoe' })}
+	result={{ tex: 'item/paper', label: 'Farmhand Work Order' }}
+	caption="Farmhand Work Order — harvests and replants nearby crops."
+/>
+
+## What's next
+
+With an order in hand, head to [Getting Started](/work-orders/getting-started/)
+to put it to work — or read up on [Routes & Filters](/work-orders/routes-and-filters/)
+to fine-tune what your golem carries.

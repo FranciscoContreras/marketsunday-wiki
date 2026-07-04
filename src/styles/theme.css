@@ -1,0 +1,219 @@
+/* ============================================================================
+   Sunday Market — "Copper Almanac"
+   The wiki extends the in-game design grammar defined in Work Orders'
+   messages.yml: ✦ brand bullet · │ rails · › pointers · copper gradient
+   (#c8773c → #e0a25a) · red accent. Dark-first; light mode reads as parchment.
+   ========================================================================== */
+
+:root {
+	/* Brand constants (shared by both schemes) */
+	--sm-copper: #c8773c;
+	--sm-copper-bright: #e0a25a;
+	--sm-verdigris: #4fae9b;
+	--sm-star: #e5484d;
+	--sm-copper-gradient: linear-gradient(100deg, #c8773c 10%, #e0a25a 90%);
+
+	/* Type */
+	--sl-font: 'Karla Variable', 'Karla', sans-serif;
+	--sm-font-display: 'Fraunces Variable', 'Fraunces', serif;
+	--__sl-font-headings: var(--sm-font-display);
+}
+
+/* ---------------------------------------------------------------- dark ---- */
+:root[data-theme='dark'] {
+	--sl-color-accent-low: #3a2415;
+	--sl-color-accent: var(--sm-copper);
+	--sl-color-accent-high: #eec39a;
+
+	--sl-color-white: #f4ede2; /* warm, not clinical */
+	--sl-color-gray-1: #e4dccf;
+	--sl-color-gray-2: #c3bcae;
+	--sl-color-gray-3: #918d81;
+	--sl-color-gray-4: #5c5c55;
+	--sl-color-gray-5: #383f45;
+	--sl-color-gray-6: #232b34;
+	--sl-color-black: #0e141c; /* deep slate from the mascot's night sky */
+
+	--sl-color-bg: #0e141c;
+	--sl-color-bg-nav: #101720;
+	--sl-color-bg-sidebar: #0c1219;
+	--sl-color-hairline: #22303b;
+	--sl-color-hairline-light: #1b2630;
+	--sl-color-hairline-shade: #0a0f15;
+
+	--sl-color-text-accent: var(--sm-copper-bright);
+	--sl-color-bg-inline-code: #1a232e;
+}
+
+/* --------------------------------------------------------------- light ---- */
+:root[data-theme='light'] {
+	--sl-color-accent-low: #f3dfc9;
+	--sl-color-accent: #a95f2b;
+	--sl-color-accent-high: #6e3c17;
+
+	--sl-color-white: #241c12; /* ink */
+	--sl-color-gray-1: #33291d;
+	--sl-color-gray-2: #4c4234;
+	--sl-color-gray-3: #6e6353;
+	--sl-color-gray-4: #a2947f;
+	--sl-color-gray-5: #d4c8b2;
+	--sl-color-gray-6: #eee5d3;
+	--sl-color-gray-7: #f6efe1;
+	--sl-color-black: #fbf6ea; /* parchment */
+
+	--sl-color-bg: #f8f2e5;
+	--sl-color-bg-nav: #f4ecdc;
+	--sl-color-bg-sidebar: #f4ecdc;
+	--sl-color-hairline: #ddd0b8;
+	--sl-color-hairline-light: #e7dcc6;
+
+	--sl-color-text-accent: #a95f2b;
+	--sl-color-bg-inline-code: #efe6d2;
+}
+
+/* -------------------------------------------------------------- atmosphere */
+:root[data-theme='dark'] body {
+	background-image:
+		radial-gradient(46rem 30rem at 12% -8%, rgba(79, 174, 155, 0.07), transparent 60%),
+		radial-gradient(50rem 34rem at 105% 0%, rgba(200, 119, 60, 0.08), transparent 55%);
+	background-attachment: fixed;
+}
+:root[data-theme='light'] body {
+	background-image:
+		radial-gradient(46rem 30rem at 10% -8%, rgba(169, 95, 43, 0.06), transparent 60%),
+		radial-gradient(50rem 34rem at 105% 0%, rgba(79, 174, 155, 0.06), transparent 55%);
+	background-attachment: fixed;
+}
+
+/* ------------------------------------------------------------- typography */
+.site-title {
+	font-family: var(--sm-font-display);
+	font-weight: 640;
+	font-variation-settings: 'opsz' 40;
+	letter-spacing: -0.01em;
+}
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+[data-has-hero] .hero h1 {
+	font-family: var(--sm-font-display);
+	font-weight: 620;
+	font-variation-settings: 'opsz' 60;
+	letter-spacing: -0.015em;
+}
+
+/* The signature: every section heading carries the brand star. */
+.sl-markdown-content h2::before {
+	content: '✦ ';
+	color: var(--sm-star);
+	font-family: var(--sl-font);
+	font-weight: 700;
+	font-size: 0.72em;
+	vertical-align: 0.18em;
+	margin-inline-end: 0.15rem;
+}
+
+/* Links: copper, with a patient underline. */
+.sl-markdown-content a {
+	color: var(--sl-color-text-accent);
+	text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+	text-underline-offset: 0.2em;
+	transition: text-decoration-color 120ms ease;
+}
+.sl-markdown-content a:hover {
+	text-decoration-color: currentColor;
+}
+
+/* ------------------------------------------------------------------ hero -- */
+[data-has-hero] .hero h1 {
+	background: var(--sm-copper-gradient);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	font-size: clamp(2.6rem, 6vw, 4.2rem);
+}
+[data-has-hero] .hero img {
+	border-radius: 22%;
+	filter: drop-shadow(0 18px 42px rgba(200, 119, 60, 0.28));
+}
+[data-has-hero] .hero .tagline {
+	font-size: clamp(1.05rem, 2vw, 1.25rem);
+	max-width: 34ch;
+}
+
+/* Hero entrance — one well-orchestrated reveal, then stillness. */
+@media (prefers-reduced-motion: no-preference) {
+	[data-has-hero] .hero > * {
+		animation: sm-rise 640ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+	}
+	[data-has-hero] .hero > *:nth-child(2) {
+		animation-delay: 120ms;
+	}
+	@keyframes sm-rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+	}
+}
+
+/* --------------------------------------------------------------- sidebar -- */
+.sidebar-content .top-level > li > details > summary .group-label span,
+.sidebar-content .top-level > li > .group-label span {
+	font-family: var(--sm-font-display);
+	font-weight: 600;
+	letter-spacing: 0.01em;
+}
+.sidebar-content a[aria-current='page'] {
+	background: linear-gradient(100deg, rgba(200, 119, 60, 0.22), rgba(224, 162, 90, 0.12));
+	color: var(--sl-color-white);
+	box-shadow: inset 2px 0 0 var(--sm-copper);
+}
+
+/* ---------------------------------------------------------------- asides -- */
+.starlight-aside {
+	border-inline-start-width: 3px;
+	border-radius: 0 0.5rem 0.5rem 0;
+}
+.starlight-aside--tip {
+	--sl-color-asides-border: var(--sm-verdigris);
+	--sl-color-asides-text-accent: var(--sm-verdigris);
+}
+.starlight-aside--note {
+	--sl-color-asides-border: var(--sm-copper);
+	--sl-color-asides-text-accent: var(--sm-copper-bright);
+}
+
+/* Minecraft textures: keep them crisp and inline. */
+.sl-markdown-content img[src*='mcmeta'] {
+	image-rendering: pixelated;
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+/* Tables: almanac rules. */
+.sl-markdown-content table {
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 0.5rem;
+}
+.sl-markdown-content th {
+	font-family: var(--sm-font-display);
+	font-weight: 600;
+	background: color-mix(in srgb, var(--sm-copper) 8%, transparent);
+}
+
+/* Cards: rail + lift on hover, in the │ grammar. */
+.card {
+	border-inline-start: 3px solid color-mix(in srgb, var(--sm-copper) 55%, transparent);
+	transition: transform 140ms ease, border-color 140ms ease;
+}
+.card:hover {
+	transform: translateY(-2px);
+	border-inline-start-color: var(--sm-copper-bright);
+}
+.card .title {
+	font-family: var(--sm-font-display);
+	font-weight: 620;
+}
